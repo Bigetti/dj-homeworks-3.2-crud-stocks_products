@@ -9,8 +9,8 @@ POST {{baseUrl}}/products/
 Content-Type: application/json
 
 {
-  "title": "сгущенка",
-  "description": "Белорусь"
+  "title": "помидоры",
+  "description": "черри"
 }
 
 ###
@@ -39,7 +39,7 @@ Content-Type: application/json
 ###
 
 # поиск продуктов по названию и описанию
-GET {{baseUrl}}/products/?search=орехи
+GET {{baseUrl}}/products/?search=огурцы
 Content-Type: application/json
 
 ###
@@ -49,7 +49,7 @@ POST {{baseUrl}}/stocks/
 Content-Type: application/json
 
 {
-  "address": "Подвал7",
+  "address": "Подвал",
   "positions": [
     {
       "product": 3,
