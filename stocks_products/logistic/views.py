@@ -10,6 +10,15 @@ from rest_framework import filters
 from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework.views import APIView
+
+
+
+
+class WelcomeView(APIView):
+    def get(self, request):
+        return Response("Приветствую!")
+
 
 
 class ProductViewSet(ModelViewSet):

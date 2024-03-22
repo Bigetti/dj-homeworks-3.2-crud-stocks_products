@@ -17,12 +17,14 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+print(f'Базовая директория проекта {BASE_DIR}')
+print(f'Это вероятно путь к обслуживанию {STATIC_URL}')
+print(f'Это абсолютный путь к каталогу со статическими файлами {STATIC_ROOT}')
 
 
 # Quick-start development settings - unsuitable for production
