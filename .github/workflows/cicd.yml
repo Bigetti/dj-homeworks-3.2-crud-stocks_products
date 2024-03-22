@@ -3,7 +3,7 @@ name: Django testing and deploy
 on:
     push:
         branches:
-            -master
+            - master
 
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
 
         steps:
             - name: Проверяем на наличие изменений
-              uses: actions/@checkout@v4
+              uses: actions/checkout@v4
 
             - name: Установка Python
               uses: actions/setup-python@v4
