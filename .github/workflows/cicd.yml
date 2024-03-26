@@ -19,43 +19,30 @@ jobs:
       DB_HOST: ${{ secrets.SECRET }}
       DB_PORT: ${{ secrets.SECRET }}
     services:
-      postgres_db:
+      postgres:
         image: postgres:13
         env:
-          POSTGRES_DB: ${{ env.NAME }}
-          POSTGRES_USER: ${{ env.USER }}
-          POSTGRES_PASSWORD: ${{ env.PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
+          POSTGRES_USER: ${{ secrets.DB_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
         ports:
           - 5432:5432
-        options:
-          --health-cmd pg_isready
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 5
-    steps:
-      - name: Проверяем на наличие изменений
-        uses: actions/checkout@v2
+        options: --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 5
 
-      - name: Установка Python
-        uses: actions/setup-python@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Установка зависимостей
+      - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Линтинг
-        run: flake8 logistic/ --exclude logistic/migrations/
+      - name: Linting
+        run: flake8 . --exclude logistic/migrations/
 
-      - name: Тестирование
-        run: python manage.py test
-        env:
-          SECRET_KEY: ${{ env.SECRET_KEY }}
-          DEBUG: ${{ env.DEBUG }}
-          ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
-          DB_ENGINE: ${{ env.DB_ENGINE }}
-          DB_NAME: ${{ env.DB_NAME }}
-          DB_USER: ${{ env.DB_USER }}
-          DB_PASSWORD: ${{ env.DB_PASSWORD }}
-          DB_HOST: ${{ env.DB_HOST }}
-          DB_PORT: ${{ env.DB_PORT }}
+      - name: Testing
+        run: python manage.py test .

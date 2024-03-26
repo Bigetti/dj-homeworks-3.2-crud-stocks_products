@@ -95,7 +95,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'cicd_db',
 
-        'HOST': '127.0.0.1',
+        #'HOST': '127.0.0.1',
+        'HOST': 'postgres',
         'PORT': '5432',
 
         'USER': 'postgres',
